@@ -17,18 +17,17 @@
         <!--</mat-form-field>-->
 
         <mat-accordion *ngIf="todos; else todosError">
-          <mat-expansion-panel #elem [id]="todo.category" *ngFor="let user of this.filterTodos(todoOwner, todoStatus)">
+          <mat-expansion-panel #elem [id]="todo.category" *ngFor="let todo of this.filterTodos(todoOwner, todoStatus)">
             <mat-expansion-panel-header>
 
               <mat-panel-title matTooltip="category: {{todo.category}}">{{todo.owner}}</mat-panel-title>
 
             </mat-expansion-panel-header>
             <mat-panel-description>Task is: {{todo.body}}</mat-panel-description>
-            <mat-panel-description>Status: {{todo.status}} years old</mat-panel-description>
+            <mat-panel-description>Status: {{todo.status}}</mat-panel-description>
 
           </mat-expansion-panel>
         </mat-accordion>
-        <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
         <ng-template #todosError>
           <mat-error>
             There was a problem loading the todos. Possibly the server is down or perhaps there are network
