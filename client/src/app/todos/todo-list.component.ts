@@ -16,12 +16,14 @@ export class TodoListComponent implements OnInit {
 
   public todoOwner: string;
   public todoStatus: boolean;
+  public todoCategory: string;
+  public todoBody: string;
 
   constructor(private todoListService: TodoListService) {
 
   }
 
-  public filterTodos(searchOwner: string, searchStatus: boolean): Todo[] {
+  public filterTodos(searchOwner: string, searchStatus: boolean, searchCategory: string, searchBody: string): Todo[] {
 
     this.filteredTodos = this.todos;
 
@@ -41,6 +43,24 @@ export class TodoListComponent implements OnInit {
       });
     }
 
+    // Filter by Category
+    if(searchCategory != null){
+      searchCategory = searchCategory.toLocaleLowerCase();
+
+      this.filteredTodos = this.filteredTodos.filter(todo => {
+        return !searchCategory || todo.category.toLowerCase().indexOf(searchCategory) !== -1;
+      })
+    }
+
+    // Filter by Body
+    if (searchBody != null) {
+      searchBody = searchBody.toLocaleLowerCase();
+
+      this.filteredTodos = this.filteredTodos.filter(todo => {
+        return !searchBody || todo.body.toLowerCase().indexOf(searchBody) !== -1;
+      });
+    }
+
     return this.filteredTodos;
   }
 
@@ -50,7 +70,7 @@ export class TodoListComponent implements OnInit {
     todos.subscribe(
       returnedTodos => {
         this.todos = returnedTodos;
-        this.filterTodos(this.todoOwner, this.todoStatus);
+        this.filterTodos(this.todoOwner, this.todoStatus, this.todoCategory, this.todoBody);
       },
       err => {
         console.log(err);
