@@ -12,9 +12,14 @@
           <input matInput id="todoStatus" #input type="boolean" placeholder="Filter by status"
                  (input)="todoStatus = $event.target.value">
         </mat-form-field>
-        <!--<mat-form-field>-->
-        <!--<input matInput id="userCompany" #input type="text" placeholder="Search for company" (input)="contentChange($event.target.value)">-->
-        <!--</mat-form-field>-->
+        <mat-form-field>
+          <input matInput id="todoCategory" #input placeholder="Filter by category"
+                 (input)="todoCategory = $event.target.value">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput id="todoBody" #input placeholder="Filter by body"
+                 (input)="todoBody = $event.target.value">
+        </mat-form-field>
 
         <mat-accordion *ngIf="todos; else todosError">
           <mat-expansion-panel #elem [id]="todo.category" *ngFor="let todo of this.filterTodos(todoOwner, todoStatus)">
