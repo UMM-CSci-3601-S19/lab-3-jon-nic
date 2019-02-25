@@ -11,7 +11,7 @@ browser.driver.controlFlow().execute = function () {
     //This delay is only put here so that you can watch the browser do its' thing.
     //If you're tired of it taking long you can remove this call
     origFn.call(browser.driver.controlFlow(), function () {
-        return protractor.promise.delayed(100);
+        return protractor.promise.delayed(10);
     });
 
     return origFn.apply(browser.driver.controlFlow(), args);
@@ -46,7 +46,7 @@ describe('User list', () => {
         }
 
         expect(page.getUniqueUser("stokesclayton@momentia.com")).toEqual("Stokes Clayton");
-
+        expect(page.getUniqueUser("boltonmonroe@vinch.com")).toEqual("Bolton Monroe");
         expect(page.getUniqueUser("merrillparker@escenta.com")).toEqual("Merrill Parker");
 
     });
