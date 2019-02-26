@@ -111,6 +111,22 @@ describe('Todo list', () => {
         .subscribe(x => expect(todoList.filteredTodos.length).toBe(1));
     });
 
+    it('todo list filters by status', () => {
+      expect(todoList.filteredTodos.length).toBe(3);
+      todoList.todoStatus = 'false';
+      const a: Observable<Todo[]> = todoList.refreshTodos();
+      a.do(x => Observable.of(x))
+        .subscribe(x => expect(todoList.filteredTodos.length).toBe(1));
+    });
+
+    it('todo list filters by status', () => {
+      expect(todoList.filteredTodos.length).toBe(3);
+      todoList.todoStatus = 'true';
+      const a: Observable<Todo[]> = todoList.refreshTodos();
+      a.do(x => Observable.of(x))
+        .subscribe(x => expect(todoList.filteredTodos.length).toBe(2));
+    });
+
     it('todo list filters by owner and category', () => {
       expect(todoList.filteredTodos.length).toBe(3);
       todoList.todoCategory = 'video games';
